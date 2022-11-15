@@ -1,6 +1,5 @@
 package me.devteqhs.example.api.module;
 
-import me.devteqhs.example.impl.modules.combat.KillAuraMod;
 import me.devteqhs.example.impl.modules.movement.SprintMod;
 import me.devteqhs.example.impl.modules.render.HUDMod;
 

@@ -1,6 +1,7 @@
 package me.devteqhs.example.impl.events.player;
 
 import me.devteqhs.example.api.event.Event;
+import me.devteqhs.example.api.event.EventState;
 
 /**
  * Event for handling motion
@@ -76,4 +77,13 @@ public class MotionEvent extends Event {
     public void setOnGround(boolean onGround) {
         this.onGround = onGround;
     }
+
+    public boolean isPre() {
+        return getEventState() == EventState.PRE;
+    }
+
+    public boolean isPost() {
+        return getEventState() == EventState.POST;
+    }
+
 }

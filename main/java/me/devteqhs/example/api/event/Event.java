@@ -33,12 +33,6 @@ public class Event {
         this.eventState = eventState;
     }
 
-    public boolean isPre() {
-        return getEventState() == EventState.PRE;
-    }
 
-    public boolean isPost() {
-        return getEventState() == EventState.POST;
-    }
 
 }
