@@ -1,32 +1,27 @@
 package me.devteqhs.example.api.module;
 
+import me.devteqhs.example.impl.modules.combat.VelocityMod;
+import me.devteqhs.example.impl.modules.movement.NoSlowdownMod;
 import me.devteqhs.example.impl.modules.movement.SprintMod;
 import me.devteqhs.example.impl.modules.render.HUDMod;
 
 import java.util.Collection;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
-
-/**
- * Class for handling all modules
- *
- * @author teqhs
- * @since 15/11/2022
- */
 
 public class ModuleManager {
 
-    /* Map to store all modules */
-    private final Map<Class<? extends Module>, Module> modules = new HashMap<>();
+    private final Map<Class<? extends Module>, Module> modules = new LinkedHashMap<>();
 
-    /* Constructor to add modules */
     public ModuleManager() {
         /* Combat */
+        add(new VelocityMod());
 
         /* Player */
 
         /* Movement */
         add(new SprintMod());
+        add(new NoSlowdownMod());
 
         /* Render */
         add(new HUDMod());
@@ -34,14 +29,10 @@ public class ModuleManager {
         /* Exploit */
     }
 
-    /**
-     * Method to add modules
-     */
     private void add(Module module) {
         modules.put(module.getClass(), module);
     }
 
-    /* Getters */
     public Collection<Module> getModules() {
         return modules.values();
     }

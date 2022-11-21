@@ -4,51 +4,39 @@ import com.mojang.realmsclient.gui.ChatFormatting;
 import me.devteqhs.example.Example;
 import net.minecraft.client.Minecraft;
 
-/**
- * Class all modules will extend from
- * Also stores all module info
- *
- * @author teqhs
- * @since 15/11/2022
- */
+public abstract class Module {
 
-public class Module {
-
-    /* All Module Info */
     protected static Minecraft mc = Minecraft.getMinecraft();
     private String name, suffix;
     private boolean toggled;
     private int key;
     private Category category;
 
-    /* Set module info to the correct info via constructor */
     public Module() {
         ModuleInfo info = getClass().getAnnotation(ModuleInfo.class);
         name = info.name();
         suffix = "";
         key = info.key();
-        toggled = toggled;
         category = info.category();
 
     }
 
-    /* On enable and disable methods */
-    public void onEnable() {}
-    public void onDisable() {}
+    public void onEnable() {
+        Example.INSTANCE.getEventBus().subscribe(this);
+    }
 
-    /* Method to toggle modules */
+    public void onDisable() {
+        Example.INSTANCE.getEventBus().unsubscribe(this);
+    }
+
     public void toggle() {
         toggled = !toggled;
         if(toggled) {
-            Example.INSTANCE.getEventBus().subscribe(this);
             onEnable();
         } else {
-            Example.INSTANCE.getEventBus().unsubscribe(this);
             onDisable();
         }
     }
-
-    /* Getters and Setters */
 
     public String getName() {
         return name;
@@ -89,6 +77,10 @@ public class Module {
     public void setCategory(Category category) {
         this.category = category;
     }
+
+    /**
+     * Get module name with suffix added onto it for rendering on the arraylist
+     */
 
     public String getDisplayName() {
         boolean hasSuffix = !suffix.equalsIgnoreCase("");

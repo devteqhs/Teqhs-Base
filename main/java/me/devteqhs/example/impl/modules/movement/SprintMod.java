@@ -8,13 +8,6 @@ import me.devteqhs.example.api.module.ModuleInfo;
 import me.devteqhs.example.impl.events.player.MotionEvent;
 import org.lwjgl.input.Keyboard;
 
-/**
- * Module to automatically sprint when the player is moving
- *
- * @author teqhs
- * @since 15/11/2022
- */
-
 @ModuleInfo(name = "Sprint", key = Keyboard.KEY_N, category = Category.MOVEMENT)
 public class SprintMod extends Module {
 

@@ -10,12 +10,8 @@ package me.devteqhs.example.api.event;
 
 public class Event {
 
-    /* Boolean which handles whether the event is cancelled */
     private boolean cancelled;
-    /* Enum EventState which handles whether the event is PRE or POST */
     private EventState eventState;
-
-    /* Getters and Setters */
 
     public boolean isCancelled() {
         return cancelled;
@@ -33,6 +29,9 @@ public class Event {
         this.eventState = eventState;
     }
 
+    public void cancel() {
+        cancelled = true;
+    }
 
 
 }

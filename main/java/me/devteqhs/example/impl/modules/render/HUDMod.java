@@ -13,21 +13,12 @@ import org.lwjgl.input.Keyboard;
 
 import java.util.*;
 
-/**
- * Module to render the clients heads up display
- *
- * @author teqhs
- * @since 15/11/2022
- */
-
 @ModuleInfo(name = "HUD", key = Keyboard.KEY_L, category = Category.RENDER)
 public class HUDMod extends Module {
 
     @Target
     private final Listener<Render2DEvent> render2DEventListener = event -> {
-      /* Render watermark */
       mc.fontRendererObj.drawStringWithShadow("Example", 2, 2, -1);
-      /* Render arraylist */
         List<Module> modules = new ArrayList<>();
         int posY = 2;
         ScaledResolution sr = new ScaledResolution(mc);
@@ -41,7 +32,6 @@ public class HUDMod extends Module {
             mc.fontRendererObj.drawStringWithShadow(module.getDisplayName(), sr.getScaledWidth() - mc.fontRendererObj.getStringWidth(module.getDisplayName()) - 2, posY, -1);
             posY += 12;
         }
-        /* Render FPS counter */
         String fps = String.valueOf(Minecraft.getDebugFPS());
         mc.fontRendererObj.drawStringWithShadow("FPS:§7 " + fps, 2, sr.getScaledHeight() - mc.fontRendererObj.FONT_HEIGHT - 1, -1);
     };

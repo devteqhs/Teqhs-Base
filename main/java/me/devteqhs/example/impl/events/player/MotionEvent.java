@@ -3,22 +3,12 @@ package me.devteqhs.example.impl.events.player;
 import me.devteqhs.example.api.event.Event;
 import me.devteqhs.example.api.event.EventState;
 
-/**
- * Event for handling motion
- *
- * @author teqhs
- * @since 15/11/2022
- */
-
 public class MotionEvent extends Event {
-
-    /* Player information */
 
     private double posX, posY, posZ;
     private float rotationYaw, rotationPitch;
     private boolean onGround;
 
-    /* Constructor */
     public MotionEvent(double posX, double posY, double posZ, float rotationYaw, float rotationPitch, boolean onGround) {
         this.posX = posX;
         this.posY = posY;
@@ -27,8 +17,6 @@ public class MotionEvent extends Event {
         this.rotationPitch = rotationPitch;
         this.onGround = onGround;
     }
-
-    /* Getters and Setters */
 
     public double getPosX() {
         return posX;

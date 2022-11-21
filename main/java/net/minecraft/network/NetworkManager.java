@@ -32,6 +32,9 @@ import java.net.SocketAddress;
 import java.util.Queue;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 import javax.crypto.SecretKey;
+
+import me.devteqhs.example.Example;
+import me.devteqhs.example.impl.events.network.PacketReceiveEvent;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.CryptManager;
@@ -152,6 +155,11 @@ public class NetworkManager extends SimpleChannelInboundHandler<Packet>
         {
             try
             {
+                PacketReceiveEvent event = new PacketReceiveEvent(p_channelRead0_2_);
+                Example.INSTANCE.getEventBus().post(event);
+                if(event.isCancelled()) {
+                    return;
+                }
                 p_channelRead0_2_.processPacket(this.packetListener);
             }
             catch (ThreadQuickExitException var4)

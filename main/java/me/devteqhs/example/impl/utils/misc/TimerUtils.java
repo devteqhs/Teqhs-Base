@@ -2,13 +2,6 @@ package me.devteqhs.example.impl.utils.misc;
 
 import me.devteqhs.example.impl.utils.Util;
 
-/**
- * Class for measuring time elapsed
- *
- * @author teqhs
- * @since 15/11/2022
- */
-
 public class TimerUtils extends Util {
 
     private long lastMS = System.currentTimeMillis();
