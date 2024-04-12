@@ -160,7 +160,7 @@ public class GuiIngame extends Gui
             this.renderTooltip(scaledresolution, partialTicks);
         }
 
-        Example.INSTANCE.getEventBus().post(new Render2DEvent());
+        Example.getInstance().getEventBus().post(new Render2DEvent());
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
         this.mc.getTextureManager().bindTexture(icons);
         GlStateManager.enableBlend();

@@ -192,7 +192,7 @@ public class EntityPlayerSP extends AbstractClientPlayer
     public void onUpdateWalkingPlayer()
     {
         final MotionEvent event = new MotionEvent(posX, getEntityBoundingBox().minY, posZ, rotationPitch, rotationYaw, onGround);
-        Example.INSTANCE.getEventBus().post(event);
+        Example.getInstance().getEventBus().post(event);
         event.setEventState(EventState.PRE);
 
         boolean flag = this.isSprinting();
@@ -792,7 +792,7 @@ public class EntityPlayerSP extends AbstractClientPlayer
         boolean flag2 = this.movementInput.moveForward >= f;
         this.movementInput.updatePlayerMoveState();
 
-        if (this.isUsingItem() && !this.isRiding() && !Example.INSTANCE.getModuleManager().getModule("No Slowdown").isToggled())
+        if (this.isUsingItem() && !this.isRiding() && !Example.getInstance().getModuleManager().getModule("No Slowdown").isToggled())
         {
             this.movementInput.moveStrafe *= 0.2F;
             this.movementInput.moveForward *= 0.2F;

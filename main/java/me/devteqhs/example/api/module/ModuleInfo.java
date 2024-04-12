@@ -11,6 +11,6 @@ public @interface ModuleInfo {
 
     String name();
     int key() default 0;
-    Category category();
+    ModuleCategory category();
 
 }

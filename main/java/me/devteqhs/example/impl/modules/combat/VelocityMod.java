@@ -2,7 +2,7 @@ package me.devteqhs.example.impl.modules.combat;
 
 import me.devteqhs.example.api.event.bus.Listener;
 import me.devteqhs.example.api.event.bus.annotations.Target;
-import me.devteqhs.example.api.module.Category;
+import me.devteqhs.example.api.module.ModuleCategory;
 import me.devteqhs.example.api.module.Module;
 import me.devteqhs.example.api.module.ModuleInfo;
 import me.devteqhs.example.impl.events.network.PacketReceiveEvent;
@@ -10,7 +10,7 @@ import net.minecraft.network.play.server.S12PacketEntityVelocity;
 import net.minecraft.network.play.server.S27PacketExplosion;
 import org.lwjgl.input.Keyboard;
 
-@ModuleInfo(name = "Velocity", key = Keyboard.KEY_J, category = Category.COMBAT)
+@ModuleInfo(name = "Velocity", key = Keyboard.KEY_J, category = ModuleCategory.COMBAT)
 public class VelocityMod extends Module {
 
     @Target

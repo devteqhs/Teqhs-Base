@@ -369,6 +369,13 @@ public class FontRenderer implements IResourceManagerReloadListener
         return this.drawString(text, x, y, color, true);
     }
 
+    public float drawCenteredString(String text, double x, double y, int color) {
+        GlStateManager.color(1,1,1);
+
+        return this.drawString(text, (int) (x - (this.getStringWidth(text) / 2)), (int) y, color);
+
+    }
+
     /**
      * Draws the specified string.
      */

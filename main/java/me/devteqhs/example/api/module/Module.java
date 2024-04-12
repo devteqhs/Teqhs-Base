@@ -3,6 +3,7 @@ package me.devteqhs.example.api.module;
 import com.mojang.realmsclient.gui.ChatFormatting;
 import me.devteqhs.example.Example;
 import net.minecraft.client.Minecraft;
+import org.apache.commons.lang3.StringUtils;
 
 public abstract class Module {
 
@@ -10,7 +11,7 @@ public abstract class Module {
     private String name, suffix;
     private boolean toggled;
     private int key;
-    private Category category;
+    private ModuleCategory category;
 
     public Module() {
         ModuleInfo info = getClass().getAnnotation(ModuleInfo.class);
@@ -18,15 +19,14 @@ public abstract class Module {
         suffix = "";
         key = info.key();
         category = info.category();
-
     }
 
     public void onEnable() {
-        Example.INSTANCE.getEventBus().subscribe(this);
+        Example.getInstance().getEventBus().subscribe(this);
     }
 
     public void onDisable() {
-        Example.INSTANCE.getEventBus().unsubscribe(this);
+        Example.getInstance().getEventBus().unsubscribe(this);
     }
 
     public void toggle() {
@@ -70,11 +70,11 @@ public abstract class Module {
         this.key = key;
     }
 
-    public Category getCategory() {
+    public ModuleCategory getCategory() {
         return category;
     }
 
-    public void setCategory(Category category) {
+    public void setCategory(ModuleCategory category) {
         this.category = category;
     }
 
@@ -83,8 +83,7 @@ public abstract class Module {
      */
 
     public String getDisplayName() {
-        boolean hasSuffix = !suffix.equalsIgnoreCase("");
-        return getName() + (hasSuffix ? ChatFormatting.GRAY + " " + suffix : "");
+        return name + (StringUtils.isNotEmpty(suffix) ? ChatFormatting.GRAY + " " + suffix : "");
     }
 
 }

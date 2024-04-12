@@ -127,7 +127,7 @@ public class Gui
     /**
      * Renders the specified text to the screen. Args : renderer, string, x, y, color
      */
-    public void drawString(FontRenderer fontRendererIn, String text, int x, int y, int color)
+    public static void drawString(FontRenderer fontRendererIn, String text, int x, int y, int color)
     {
         fontRendererIn.drawStringWithShadow(text, (float)x, (float)y, color);
     }
