@@ -1,9 +1,11 @@
-package me.devteqhs.example.api.module;
+package me.devteqhs.example.impl.modules;
 
-import me.devteqhs.example.impl.modules.combat.VelocityMod;
-import me.devteqhs.example.impl.modules.misc.DevelopmentMod;
-import me.devteqhs.example.impl.modules.movement.NoSlowdownMod;
-import me.devteqhs.example.impl.modules.movement.SprintMod;
+import me.devteqhs.example.api.module.Module;
+import me.devteqhs.example.api.module.ModuleCategory;
+import me.devteqhs.example.impl.modules.combat.VelocityModule;
+import me.devteqhs.example.impl.modules.misc.DevelopmentModule;
+import me.devteqhs.example.impl.modules.movement.NoSlowdownModule;
+import me.devteqhs.example.impl.modules.movement.SprintModule;
 import me.devteqhs.example.impl.modules.render.HUDMod;
 
 import java.util.*;
@@ -18,15 +20,15 @@ public class ModuleManager {
 
     public void registerModules() {
         /** COMBAT */
-        add(new VelocityMod());
+        add(new VelocityModule());
         /** PLAYER */
         /** MOVEMENT */
-        add(new SprintMod(), new NoSlowdownMod());
+        add(new SprintModule(), new NoSlowdownModule());
         /** EXPLOIT */
         /** RENDER */
         add(new HUDMod());
         /** MISC */
-        add(new DevelopmentMod());
+        add(new DevelopmentModule());
     }
 
     private void add(Module... modules) {

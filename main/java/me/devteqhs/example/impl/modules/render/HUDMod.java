@@ -2,7 +2,7 @@ package me.devteqhs.example.impl.modules.render;
 
 import me.devteqhs.example.Example;
 import me.devteqhs.example.api.event.bus.Listener;
-import me.devteqhs.example.api.event.bus.annotations.Target;
+import me.devteqhs.example.api.event.bus.annotations.EventLink;
 import me.devteqhs.example.api.module.ModuleCategory;
 import me.devteqhs.example.api.module.Module;
 import me.devteqhs.example.api.module.ModuleInfo;
@@ -17,7 +17,7 @@ import java.util.*;
 @ModuleInfo(name = "HUD", key = Keyboard.KEY_L, category = ModuleCategory.RENDER)
 public class HUDMod extends Module {
 
-    @Target
+    @EventLink
     private final Listener<Render2DEvent> render2DEventListener = event -> {
         Minecraft mc = Minecraft.getMinecraft();
         FontRenderer fontRenderer = mc.fontRendererObj;

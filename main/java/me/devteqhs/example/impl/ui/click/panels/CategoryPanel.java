@@ -2,35 +2,39 @@ package me.devteqhs.example.impl.ui.click.panels;
 
 import me.devteqhs.example.api.module.Module;
 import me.devteqhs.example.api.module.ModuleCategory;
-import me.devteqhs.example.api.module.ModuleManager;
-import me.devteqhs.example.impl.ui.click.panels.buttons.ModuleButton;
+import me.devteqhs.example.impl.modules.ModuleManager;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 
 import java.awt.*;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CategoryPanel {
     private final ModuleCategory category;
-    private final int x, y;
+    private final int x;
+    private final int y;
     private boolean expanded = false;
     private final ModuleManager moduleManager;
-    private final List<ModuleButton> moduleButtons = new ArrayList<>();
+    private final List<ModulePanel> modulePanels = new ArrayList<>();
+    private int panelWidth = 90;
 
     public CategoryPanel(ModuleCategory category, int x, int y, ModuleManager moduleManager) {
         this.category = category;
         this.x = x;
         this.y = y;
         this.moduleManager = moduleManager;
-        initModuleButtons();
+        initializeModulePanels();
     }
 
-    private void initModuleButtons() {
+    private void initializeModulePanels() {
         int moduleY = y + 20;
         for (Module module : moduleManager.getModulesByCategory(category)) {
-            moduleButtons.add(new ModuleButton(module, x, moduleY));
+            ModulePanel panel = new ModulePanel(module, x, moduleY);
+            modulePanels.add(panel);
             moduleY += 20;
+            panelWidth = Math.max(panelWidth, !module.getProperties().isEmpty() ? 180 : panelWidth);
         }
     }
 
@@ -39,29 +43,36 @@ public class CategoryPanel {
         Minecraft.getMinecraft().fontRendererObj.drawStringWithShadow(category.toString(), x + 5, y + 6, -1);
 
         if (expanded) {
-            for (ModuleButton button : moduleButtons) {
-                button.draw(mouseX, mouseY);
-            }
+            modulePanels.forEach(panel -> {
+                panel.draw(mouseX, mouseY);
+                panelWidth = Math.max(panelWidth, panel.getExpandedWidth());
+            });
         }
     }
 
     public void mouseClicked(int mouseX, int mouseY, int mouseButton) {
-        if (mouseWithinBounds(mouseX, mouseY, x, y, 90, 20) && mouseButton == 1) {
+        if (mouseWithinBounds(mouseX, mouseY) && mouseButton == 1) {
             expanded = !expanded;
         }
 
         if (expanded) {
-            for (ModuleButton button : moduleButtons) {
-                button.mouseClicked(mouseX, mouseY, mouseButton);
+            modulePanels.forEach(panel -> panel.mouseClicked(mouseX, mouseY, mouseButton));
+        }
+    }
+
+    public void keyTyped(char typedChar, int keyCode) throws IOException {
+        if (expanded) {
+            for (ModulePanel panel : modulePanels) {
+                panel.keyTyped(typedChar, keyCode);
             }
         }
     }
 
-    private boolean mouseWithinBounds(int mouseX, int mouseY, int x, int y, int width, int height) {
-        return mouseX >= x && mouseX <= x + width && mouseY >= y && mouseY <= y + height;
+    private boolean mouseWithinBounds(int mouseX, int mouseY) {
+        return mouseX >= x && mouseX <= x + 90 && mouseY >= y && mouseY <= y + 20;
     }
 
-    public List<ModuleButton> getModuleButtons() {
-        return moduleButtons;
+    public List<ModulePanel> getModulePanels() {
+        return modulePanels;
     }
 }

@@ -277,6 +277,9 @@ public class EntityPlayerSP extends AbstractClientPlayer
                 this.lastReportedYaw = event.getRotationYaw();
                 this.lastReportedPitch = event.getRotationPitch();
             }
+
+            event.setEventState(EventState.POST);
+            Example.getInstance().getEventBus().post(event);
         }
     }
 

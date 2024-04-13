@@ -2,8 +2,13 @@ package me.devteqhs.example.api.module;
 
 import com.mojang.realmsclient.gui.ChatFormatting;
 import me.devteqhs.example.Example;
+import me.devteqhs.example.api.property.Property;
 import net.minecraft.client.Minecraft;
 import org.apache.commons.lang3.StringUtils;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public abstract class Module {
 
@@ -13,6 +18,7 @@ public abstract class Module {
     private int key;
     private ModuleCategory category;
     private boolean listening = false;
+    private List<Property<?>> properties = new ArrayList<>();
 
     public Module() {
         ModuleInfo info = getClass().getAnnotation(ModuleInfo.class);
@@ -20,6 +26,10 @@ public abstract class Module {
         suffix = "";
         key = info.key();
         category = info.category();
+    }
+
+    public void addProperties(Property<?>... properties) {
+        this.properties.addAll(Arrays.asList(properties));
     }
 
     public void onEnable() {
@@ -69,6 +79,10 @@ public abstract class Module {
 
     public void setListening(boolean listening) {
         this.listening = listening;
+    }
+
+    public List<Property<?>> getProperties() {
+        return properties;
     }
 
     public int getKey() {

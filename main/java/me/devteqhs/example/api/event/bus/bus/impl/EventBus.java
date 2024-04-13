@@ -1,7 +1,7 @@
 package me.devteqhs.example.api.event.bus.bus.impl;
 
 import me.devteqhs.example.api.event.bus.Listener;
-import me.devteqhs.example.api.event.bus.annotations.Target;
+import me.devteqhs.example.api.event.bus.annotations.EventLink;
 import me.devteqhs.example.api.event.bus.bus.Bus;
 
 import java.lang.invoke.MethodHandles;
@@ -25,7 +25,7 @@ public final class EventBus<Event> implements Bus<Event> {
     @Override
     public void subscribe(final Object subscriber) {
         for (final Field field : subscriber.getClass().getDeclaredFields()) {
-            final Target annotation = field.getAnnotation(Target.class);
+            final EventLink annotation = field.getAnnotation(EventLink.class);
             if (annotation != null) {
                 final Type eventType = ((ParameterizedType) (field.getGenericType())).getActualTypeArguments()[0];
 
