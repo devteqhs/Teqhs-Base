@@ -8,6 +8,7 @@ import net.minecraft.client.gui.GuiTextField;
 import org.lwjgl.input.Keyboard;
 
 import java.awt.*;
+import java.text.DecimalFormat;
 
 /**
  * You can replace this code with sliders instead.
@@ -16,7 +17,7 @@ import java.awt.*;
 
 public class DoublePropertyComponent extends PropertyComponent<DoubleProperty> {
     public boolean inputMode = false;
-    private GuiTextField inputField;
+    private final GuiTextField inputField;
 
     public DoublePropertyComponent(DoubleProperty property, int x, int y) {
         super(property, x, y, 90, 20);
@@ -29,12 +30,17 @@ public class DoublePropertyComponent extends PropertyComponent<DoubleProperty> {
     public void draw(int mouseX, int mouseY) {
         Gui.drawRect(x, y, x + width, y + height, new Color(20, 20, 50).getRGB());
         if (!inputMode) {
-            String displayText = property.getName() + ": " + String.format("%.2f", property.getValue());
-            Minecraft.getMinecraft().fontRendererObj.drawString(displayText, x + 2, y + (height - 8) / 2, -1);
+            Minecraft.getMinecraft().fontRendererObj.drawString(
+                    property.getName() + ": " + new DecimalFormat("0.##").format(property.getValue()),
+                    x + 2,
+                    y + (height - 8) / 2,
+                    -1
+            );
         } else {
             inputField.drawTextBox();
         }
     }
+
 
     @Override
     public void mouseClicked(int mouseX, int mouseY, int mouseButton) {

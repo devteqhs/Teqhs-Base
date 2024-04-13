@@ -25,4 +25,9 @@ public class MultiSelectEnumProperty<E extends Enum<E>> extends Property<Set<E>>
     public E[] getValues() {
         return values;
     }
+
+    public boolean isSelected(E value) {
+        return this.getValue().contains(value);
+    }
+
 }

@@ -2,6 +2,7 @@ package me.devteqhs.example.impl.modules;
 
 import me.devteqhs.example.api.module.Module;
 import me.devteqhs.example.api.module.ModuleCategory;
+import me.devteqhs.example.impl.modules.combat.AuraModule;
 import me.devteqhs.example.impl.modules.combat.VelocityModule;
 import me.devteqhs.example.impl.modules.misc.DevelopmentModule;
 import me.devteqhs.example.impl.modules.movement.NoSlowdownModule;
@@ -20,7 +21,7 @@ public class ModuleManager {
 
     public void registerModules() {
         /** COMBAT */
-        add(new VelocityModule());
+        add(new AuraModule(), new VelocityModule());
         /** PLAYER */
         /** MOVEMENT */
         add(new SprintModule(), new NoSlowdownModule());

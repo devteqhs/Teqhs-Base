@@ -35,6 +35,7 @@ import javax.crypto.SecretKey;
 
 import me.devteqhs.example.Example;
 import me.devteqhs.example.impl.events.network.PacketReceiveEvent;
+import me.devteqhs.example.impl.events.network.PacketSendEvent;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.CryptManager;
@@ -184,6 +185,9 @@ public class NetworkManager extends SimpleChannelInboundHandler<Packet>
     {
         if (this.isChannelOpen())
         {
+            PacketSendEvent event = new PacketSendEvent(packetIn);
+            Example.getInstance().getEventBus().post(event);
+            if(event.isCancelled()) return;
             this.flushOutboundQueue();
             this.dispatchPacket(packetIn, (GenericFutureListener <? extends Future <? super Void >> [])null);
         }
