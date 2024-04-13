@@ -7,31 +7,34 @@ import me.devteqhs.example.impl.modules.movement.SprintMod;
 import me.devteqhs.example.impl.modules.render.HUDMod;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class ModuleManager {
 
-    private final Map<ModuleCategory, List<Module>> modules = new EnumMap<>(ModuleCategory.class);
+    private final HashMap<Class<? extends Module>, Module> modules = new LinkedHashMap<>();
 
     public ModuleManager() {
         registerModules();
     }
 
     public void registerModules() {
-        add(ModuleCategory.COMBAT, new VelocityMod());
-        add(ModuleCategory.MOVEMENT, new SprintMod(), new NoSlowdownMod());
-        add(ModuleCategory.RENDER, new HUDMod());
-        add(ModuleCategory.MISC, new DevelopmentMod());
+        /** COMBAT */
+        add(new VelocityMod());
+        /** PLAYER */
+        /** MOVEMENT */
+        add(new SprintMod(), new NoSlowdownMod());
+        /** EXPLOIT */
+        /** RENDER */
+        add(new HUDMod());
+        /** MISC */
+        add(new DevelopmentMod());
     }
 
-    private void add(ModuleCategory category, Module... modules) {
-        for (Module module : modules) {
-            this.modules.computeIfAbsent(category, k -> new ArrayList<>()).add(module);
-        }
+    private void add(Module... modules) {
+        Arrays.stream(modules).forEach(mod -> this.modules.put(mod.getClass(), mod));
     }
 
-    public List<Module> getModules() {
-        return modules.values().stream().flatMap(List::stream).collect(Collectors.toList());
+    public Collection<Module> getModules() {
+        return modules.values();
     }
 
     public Module getModule(String name) {

@@ -12,6 +12,7 @@ public abstract class Module {
     private boolean toggled;
     private int key;
     private ModuleCategory category;
+    private boolean listening = false;
 
     public Module() {
         ModuleInfo info = getClass().getAnnotation(ModuleInfo.class);
@@ -60,6 +61,14 @@ public abstract class Module {
 
     public void setToggled(boolean toggled) {
         this.toggled = toggled;
+    }
+
+    public boolean isListening() {
+        return listening;
+    }
+
+    public void setListening(boolean listening) {
+        this.listening = listening;
     }
 
     public int getKey() {
